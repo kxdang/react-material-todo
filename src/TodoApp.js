@@ -7,8 +7,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 
-import { red } from "@material-ui/core/colors";
-
 function Todo() {
   const initialTodos = [
     {
@@ -33,6 +31,12 @@ function Todo() {
     setTodos([...todos, { id: 4, task: newTodoText, completed: false }]);
   };
 
+  const removeTodo = (todoId) => {
+    //filter out removed todo
+    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
+    setTodos(updatedTodos);
+  };
+
   return (
     <Paper
       style={{
@@ -48,8 +52,12 @@ function Todo() {
           <Typography color="inherit">TODOS with HOOKS</Typography>
         </Toolbar>
       </AppBar>
-      <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <Grid container justify="center" style={{ marginTop: "1rem" }}>
+        <Grid item xs={11} md={8} lg={4}>
+          <TodoForm addTodo={addTodo} />
+          <TodoList todos={todos} removeTodo={removeTodo} />
+        </Grid>
+      </Grid>
     </Paper>
   );
 }
