@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 import Typography from "@material-ui/core/Typography";
@@ -8,9 +9,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import useTodoState from "./hooks/useTodoState";
 
-function Todo() {
-  const initialTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
-
+function TodoApp() {
+  const initialTodos = [];
   const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
     initialTodos
   );
@@ -31,7 +31,9 @@ function Todo() {
     >
       <AppBar color="primary" position="static" style={{ height: "64px" }}>
         <Toolbar>
-          <Typography color="inherit">TODOS with HOOKS</Typography>
+          <Typography color="inherit">
+            To-do React application with Hooks
+          </Typography>
         </Toolbar>
       </AppBar>
       <Grid container justify="center" style={{ marginTop: "1rem" }}>
@@ -49,4 +51,4 @@ function Todo() {
   );
 }
 
-export default Todo;
+export default TodoApp;
