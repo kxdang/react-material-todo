@@ -12,12 +12,14 @@ function EditTodoForm({ editTodo, id, currentTask, toggle }) {
         reset();
         toggle(); //toggles the toggleIsEditing in parent
       }}
+      style={{ marginLeft: "1rem", width: "50%" }}
     >
       <TextField
         value={value}
         margin="normal"
         onChange={handleChange}
         fullWidth
+        autoFocus
       />
     </form>
   );
