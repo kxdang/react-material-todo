@@ -8,11 +8,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import EditTodoForm from "./EditTodoForm";
-import { TodosContext } from "./context/todos.context";
+import { DispatchContext } from "./context/todos.context";
 
 function Todo({ id, task, completed }) {
+  const dispatch = useContext(DispatchContext);
   const [isEditing, toggleIsEditing] = useToggleState();
-  const { removeTodo, toggleTodo } = useContext(TodosContext);
   return (
     <ListItem style={{ height: "64px" }}>
       {isEditing ? (
@@ -22,7 +22,7 @@ function Todo({ id, task, completed }) {
           <Checkbox
             tabIndex={-1}
             checked={completed}
-            onClick={() => toggleTodo(id)}
+            onClick={() => dispatch({ type: "TOGGLE", id: id })}
           />
           <ListItemText
             style={{ textDecoration: completed ? "line-through" : "none" }}
@@ -34,7 +34,10 @@ function Todo({ id, task, completed }) {
               <EditIcon />
             </IconButton>
 
-            <IconButton aria-label="Delete" onClick={() => removeTodo(id)}>
+            <IconButton
+              aria-label="Delete"
+              onClick={() => dispatch({ type: "REMOVE", id: id })}
+            >
               <DeleteIcon />
             </IconButton>
           </ListItemSecondaryAction>
